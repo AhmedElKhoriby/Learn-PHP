@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Posts</title>
+  </head>
+
+  <body>
+    <h1>Posts</h1>
+
+    <!-- Add -->
+    <form
+      action="../src/add-delete.php"
+      method="POST"
+    >
+      <input
+        type="text"
+        name="add"
+        placeholder="Value to add"
+      />
+
+      <button type="submit">Add</button>
+    </form>
+
+    <!-- Delete -->
+
+    <form
+      action="../src/add-delete.php"
+      method="POST"
+    >
+      <input
+        type="text"
+        name="delete"
+        placeholder="Value to delete"
+      />
+
+      <button type="submit">Delete</button>
+    </form>
+  </body>
+</html>
