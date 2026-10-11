@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+require_once "../db/index.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -27,26 +28,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         "UTF-8"
     );
 
-    if(isset($_SESSION['email']) && isset($_SESSION['password'])) {
-      
-      if($_SESSION['email'] !== $email) {
-        echo "there is no email such like that!";
-        exit;
-      }
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      if($_SESSION['password'] !== $password) {
-        echo "password is wrong!";
+    if(!$user || !password_verify($password, $user['password'])) {
+        echo "Invalid email or password";
         exit;
-      }
-
-      
-      echo "Email: " . $_SESSION["email"];
-      echo "<br>";
-      echo "=============================";
-      echo "<br>";
-      echo "Loged in Successfully !";
-      exit;
     }
 
-    echo "please, register first before login.";
+    $_SESSION['user_id'] = $user['id'];
+
+    echo "Email: " . $_SESSION['user_id'];
+    echo "<br>";
+    echo "=============================";
+    echo "<br>";
+    echo "Loged in Successfully !";
+    header("Location: ../public/add-delete.html");
+    exit;
 }
+
+echo "please, register first before login.";

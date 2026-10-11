@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+require_once "../db/index.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = trim($_POST["email"] ?? "");
@@ -26,12 +27,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         "UTF-8"
     );
 
-    $_SESSION['email'] = $email;
-    $_SESSION['password'] = $password;
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    try {
+        $stmt = $conn->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $password);
+        $stmt->execute();
+
+        echo "User registered successfully!";
+        
+        //header("Location: ../public/login.html");
+        //exit;
+
+    } catch (PDOException $e) {
+        die("Error: " . $e->getMessage());
+    }
 
 
     echo "<br>";
-    echo "Email: " . $_SESSION["email"];
+    echo "Email: " . $email;
     echo "<br>";
     echo "=============================";
     echo "<br>";

@@ -8,32 +8,66 @@
   <body>
     <h1>Posts</h1>
 
-    <!-- Add -->
+    <!-- Create -->
     <form
       action="../src/add-delete.php"
       method="POST"
     >
       <input
-        type="text"
-        name="add"
-        placeholder="Value to add"
+        type="hidden"
+        name="action"
+        value="add"
       />
-
+      <input
+        type="text"
+        name="content"
+        placeholder="New post content"
+        required
+      />
       <button type="submit">Add</button>
     </form>
 
-    <!-- Delete -->
-
+    <!-- Update -->
     <form
       action="../src/add-delete.php"
       method="POST"
     >
       <input
-        type="text"
-        name="delete"
-        placeholder="Value to delete"
+        type="hidden"
+        name="action"
+        value="update"
       />
+      <input
+        type="number"
+        name="post_id"
+        placeholder="Post ID"
+        required
+      />
+      <input
+        type="text"
+        name="content"
+        placeholder="New content"
+        required
+      />
+      <button type="submit">Update</button>
+    </form>
 
+    <!-- Delete -->
+    <form
+      action="../src/add-delete.php"
+      method="POST"
+    >
+      <input
+        type="hidden"
+        name="action"
+        value="delete"
+      />
+      <input
+        type="number"
+        name="post_id"
+        placeholder="Post ID to delete"
+        required
+      />
       <button type="submit">Delete</button>
     </form>
 
