@@ -1,6 +1,13 @@
 <?php
 
 session_start();
+
+// Auth check
+if (!isset($_SESSION['email'])) {
+    header("Location: ../public/login.html");
+    exit;
+}
+
 // if (!isset($_SESSION['POSTS'])) {
 //     $_SESSION['POSTS'] = [];
 // }
