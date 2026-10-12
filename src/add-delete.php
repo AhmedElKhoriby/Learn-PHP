@@ -50,6 +50,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->execute();
     }
 
+    // 4. Read Posts
+    elseif ($action === "read") {
+        $stmt = $conn->prepare("SELECT * FROM posts WHERE user_id = :user_id");
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+    }
 }
 
 $stmt = $conn->prepare("SELECT * FROM posts WHERE user_id = :user_id ORDER BY id DESC");
