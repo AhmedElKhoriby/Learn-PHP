@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+  </head>
+
+  <body>
+    <h1>Login</h1>
+
+    <form
+      action="Login.php"
+      method="POST"
+    >
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+      />
+
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+      />
+
+      <button type="submit">Login</button>
+    </form>
+
+    <br />
+
+    <form
+      action="../../without-oop/src/logout.php"
+      method="POST"
+    >
+      <button type="submit">Logout</button>
+    </form>
+  </body>
+</html>

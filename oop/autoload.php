@@ -9,3 +9,6 @@ spl_autoload_register(function ($classPath) {
   }
 });
 
+// spl_autoload_register(function ($classPath) {
+//   require $clasPath . ".php";
+// });
